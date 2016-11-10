@@ -1,0 +1,40 @@
+/**
+ * Copyright (c) 2016 krtkl inc.
+ *
+ * PWM Test Device Tree Overlay for snickerdoodle
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible =	"xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
+
+	fragment@0 {
+		target-path =	"/";
+		__overlay__ {
+			
+			#address-cells =	<0x1>;
+			#size-cells =		<0x1>;
+
+			axi_pwm0: timer@42800000 {
+				compatible =		"xlnx,pwm-1.00";
+				clock-frequency =	<50000000>;
+				#pwm-cells =		<0x2>;
+				clocks =		<0x1 15>;
+				reg =			<0x42800000 0x10000>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target-path =	"\__symbols__";
+		__overlay__ {
+			axi_pwm0 =	&axi_pwm0;
+		};
+	};
+};
