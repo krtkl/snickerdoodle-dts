@@ -25,7 +25,7 @@
 				compatible =		"xlnx,pwm-1.00";
 				clock-frequency =	<50000000>;
 				#pwm-cells =		<0x2>;
-				clocks =		<0x1 15>;
+				clocks =		<&clkc 15>;
 				reg =			<0x42800000 0x10000>;
 			};
 		};
