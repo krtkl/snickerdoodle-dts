@@ -12,29 +12,29 @@
 /plugin/;
 
 / {
-	compatible =	"xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
+	compatible = "xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
 
 	fragment@0 {
-		target-path =	"/";
+		target-path = "/";
 		__overlay__ {
 			
-			#address-cells =	<0x1>;
-			#size-cells =		<0x1>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 
 			axi_pwm0: timer@42800000 {
-				compatible =		"xlnx,pwm-1.00";
-				clock-frequency =	<50000000>;
-				#pwm-cells =		<0x2>;
-				clocks =		<&clkc 15>;
-				reg =			<0x42800000 0x10000>;
+				compatible = "xlnx,pwm-1.00";
+				clock-frequency = <50000000>;
+				#pwm-cells = <2>;
+				clocks = <&clkc 15>;
+				reg = <0x42800000 0x10000>;
 			};
 		};
 	};
 
 	fragment@1 {
-		target-path =	"\__symbols__";
+		target-path = "\__symbols__";
 		__overlay__ {
-			axi_pwm0 =	&axi_pwm0;
+			axi_pwm0 = &axi_pwm0;
 		};
 	};
 };

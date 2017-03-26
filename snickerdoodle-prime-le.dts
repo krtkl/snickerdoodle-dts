@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2016 krtkl inc.
  *
- * snickerdoodle black base device tree source
+ * snickerdoodle prime le base device tree source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -9,8 +9,8 @@
  */
 
 /dts-v1/;
-/include/ "snickerdoodle-black.dtsi"
+/include/ "snickerdoodle-prime-le.dtsi"
 
 / {
-	model = "snickerdoodle black";
+	model = "snickerdoodle prime le";
 };

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2016 krtkl inc.
  *
- * snickerdoodle base device tree source
+ * snickerdoodle piSmasher device tree source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -18,4 +18,26 @@
 		device_type = "memory";
 		reg = <0x0 0x40000000>;
 	};
+
+        usb_phy0: phy0 {
+                compatible = "usb-nop-xceiv";
+                #phy-cells = <0>;
+        };
+};
+
+&gem0 {
+	status =	"okay";
+	phy-mode =	"rgmii-id";
+	phy-handle =	<&ethernet_phy0>;
+
+	ethernet_phy0: ethernet-phy@0 {
+		reg = <0x0>;
+	};
+};
+
+
+&usb0 {
+	status = "okay";
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
 };

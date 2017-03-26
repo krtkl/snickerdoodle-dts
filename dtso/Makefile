@@ -3,13 +3,12 @@
 #
 
 
-dtbo-y += gpio.dtbo
+dtbo-y := gpio.dtbo
 dtbo-y += pwm.dtbo
-
 
 all : $(dtbo-y)
 
-$(dtbo-y) : $(addsuffix .dts, $(basename $(dtbo-y)))
+%.dtbo : %.dts
 	@echo "  $< --> $@"
 	@dtc -@ -I dts -O dtb -o $@ $<
 

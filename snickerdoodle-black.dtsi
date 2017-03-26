@@ -1,21 +1,33 @@
 /**
  * Copyright (c) 2016 krtkl inc.
  *
- * snickerdoodle base device tree source
+ * snickerdoodle black base device tree source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
  * the Free Software Foundation.
  */
 
-/dts-v1/;
 /include/ "snickerdoodle.dtsi"
-
 / {
-	model = "snickerdoodle";
+        compatible = "xlnx,zynq-snickerdoodle-black", "xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
+
+	cpus {
+		cpu@0 {
+			operating-points = <
+				/* kHz	uV */
+				866667	1000000
+				433334	1000000
+			>;
+		};
+	};
 
 	memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x40000000>;
 	};
+};
+
+&wlcore {
+	compatible = "wlcore", "ti,wl1837";
 };

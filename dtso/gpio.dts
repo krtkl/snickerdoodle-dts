@@ -12,35 +12,35 @@
 /plugin/;
 
 / {
-	compatible =	"xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
+	compatible = "xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
 
 	fragment@0 {
-		target-path =	"/";
+		target-path = "/";
 		__overlay__ {
 			
-			#address-cells =	<0x1>;
-			#size-cells =		<0x1>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 
 			axi_gpio0: gpio@41200000 {
-				compatible =		"xlnx,xps-gpio-1.00.a";
+				compatible = "xlnx,xps-gpio-1.00.a";
 				gpio-controller;
-				#gpio-cells =		<0x2>;
-				#address-cells =	<0x2>;
-				#size-cells =		<0x1>;
-				interrupt-parent =	<&intc>;
-				reg =			<0x41200000 0x10000>;
-				xlnx,is-dual =		<0x0>;
-				xlnx,all-inputs =	<0x0>;
-				xlnx,tri-default =	<0xffffffff>;
-				xlnx,gpio-width =	<0x19>;
+				#gpio-cells = <2>;
+				#address-cells = <2>;
+				#size-cells = <1>;
+				interrupt-parent = <&intc>;
+				reg = <0x41200000 0x10000>;
+				xlnx,is-dual = <0>;
+				xlnx,all-inputs = <0>;
+				xlnx,tri-default = <0xffffffff>;
+				xlnx,gpio-width = <25>;
 			};
 		};
 	};
 
 	fragment@1 {
-		target-path =	"\__symbols__";
+		target-path = "\__symbols__";
 		__overlay__ {
-			axi_gpio0 =	&axi_gpio0;
+			axi_gpio0 = &axi_gpio0;
 		};
 	};
 };

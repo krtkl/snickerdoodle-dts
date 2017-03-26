@@ -5,25 +5,45 @@
 
 dtb-y += snickerdoodle.dtb
 dtb-y += snickerdoodle-black.dtb
-dtb-y += snickerdoodle-piSmasher.dtb
-dtb-y += snickerdoodle-black-piSmasher.dtb
+dtb-y += snickerdoodle-prime.dtb
+dtb-y += snickerdoodle-prime-le.dtb
 
 # Add the device tree overlays
 dtbo-y += dtso/
 
-all : $(dtb-y) dtbo
+# Add baseboard device trees
+board-dtb += baseboard/
 
+all : $(dtb-y) dtbo board_dtb
 
-$(dtb-y) : $(addsuffix .dts, $(basename $(dtb-y)))
+%.dtb : %.dts
 	@echo "  $< --> $@"
 	@dtc -I dts -O dtb -o $@ $<
 
+.PHONY = dtbo
+
 dtbo : $(dtbo-y)
 	@echo "-- Building overlays"
-	@cd $< && $(MAKE)
+	$(MAKE) -C $<
 
-clean-dtbo : $(dtbo-y)
-	@cd $< && $(MAKE) clean
 
-clean : clean-dtbo
+export DTSI_DIR=${PWD}
+
+.PHONY : board_dtb
+
+board_dtb : $(board-dtb)
+	@echo "-- Building baseboard device trees"
+	$(MAKE) -C $<
+
+.PHONY : clean_dtbo
+
+clean_dtbo : $(dtbo-y)
+	$(MAKE) -C $< clean
+
+.PHONY : clean_board
+
+clean_board : $(board-dtb)
+	$(MAKE) -C $< clean 
+
+clean : clean_dtbo clean_board
 	@rm -f $(dtb-y)
