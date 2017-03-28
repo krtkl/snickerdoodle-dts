@@ -4,6 +4,7 @@
 
 
 dtb-y += snickerdoodle.dtb
+dtb-y += snickerdoodle-one.dtb
 dtb-y += snickerdoodle-black.dtb
 dtb-y += snickerdoodle-prime.dtb
 dtb-y += snickerdoodle-prime-le.dtb
