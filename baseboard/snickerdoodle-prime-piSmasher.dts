@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2016 krtkl inc.
+ * Copyright (c) 2017 krtkl inc.
  *
- * snickerdoodle black piSmasher device tree source
+ * snickerdoodle prime LE piSmasher device tree source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -9,13 +9,14 @@
  */
 
 /dts-v1/;
-/include/ "snickerdoodle-black.dtsi"
+/include/ "snickerdoodle-prime-le.dtsi"
 
 / {
-	model = "snickerdoodle black";
+	model = "snickerdoodle prime LE";
 
 	aliases {
 		ethernet0 = &gem0;
+//		ethernet1 = &gem1;
 	};
 
         usb_phy0: phy0 {
@@ -42,6 +43,7 @@
 	gmii2rgmii-phy-handle = <&gmiitorgmii0>;
 
 	ethernet_phy0: ethernet-phy@0 {
+		compatible = "marvell,88e1510";
 		device_type = "ethernet-phy";
 		reg = <0>;
 	};
