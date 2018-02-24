@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2016 krtkl inc.
+ * Copyright (c) 2018 krtkl inc.
  *
- * snickerdoodle base device tree source
+ * snickerdoodle SPI
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -20,7 +20,16 @@
 	};
 };
 
-&wlcore {
-	compatible = "wlcore", "ti,wl1831";
-};
+//&wlcore {
+//	compatible = "wlcore", "ti,wl1831";
+//};
 
+&spi0 {
+        status = "okay";
+
+        spidev@0 {
+                compatible = "linux,spidev";
+                spi-max-frequency = <5000000>;
+                reg = <0>;
+        };
+};

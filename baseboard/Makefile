@@ -6,6 +6,9 @@
 dtb-y += snickerdoodle-piSmasher.dtb
 dtb-y += snickerdoodle-black-piSmasher.dtb
 dtb-y += snickerdoodle-prime-piSmasher.dtb
+dtb-y += snickerdoodle-black-birddog.dtb
+dtb-y += snickerdoodle-black-birddog-testing.dtb
+dtb-y += snickerdoodle-black-scorbitron.dtb
 
 all : $(dtb-y)
 

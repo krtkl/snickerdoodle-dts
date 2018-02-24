@@ -1,0 +1,34 @@
+/**
+ * Copyright (c) 2016 krtkl inc.
+ *
+ * snickerdoodle black UIO device tree source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+
+/ {
+	model = "snickerdoodle black";
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		test_mem: buffer@30000000 {
+			reg = <0x30000000 0x10000000>;
+		};
+	};
+
+	gpio@41200000 {
+		reg = <0x41200000 0x10000
+		       0x41210000 0x10000>;
+		compatible = "krtkl,generic-uio,ui_pdrv";
+		interrupt-parent = <&intc>;
+		interrupts = <0 29 4>;
+	};
+};

@@ -1,0 +1,160 @@
+/**
+ * Copyright (c) 2016 krtkl inc.
+ *
+ * snickerdoodle black birddog studio device tree source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+
+/ {
+	model = "snickerdoodle black";
+
+	aliases {
+		ethernet0 = &gem0;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+		
+		sdi_mem: video@20000000 {
+			reg = <0x20000000 0x017bb000>;
+		};
+
+		hdmi_mem: video@217bb000 {
+			reg = <0x217bb000 0x017bb000>;
+		};
+
+		codec_mem: codec@3f000000 {
+			reg = <0x3f000000 0x3fffffff>;
+		};
+	};
+
+        usb_phy0: phy0 {
+                compatible = "ulpi-phy";
+                #phy-cells = <0>;
+		view-port = <0x0170>;
+		drv-vbus;
+        };
+};
+
+&i2c0 {
+	status = "okay";
+	clock-frequency = <400000>;
+};
+
+&spi0 {
+        status = "okay";
+
+        spidev@0 {
+                compatible = "linux,spidev";
+                spi-max-frequency = <5000000>;
+                reg = <0>;
+        };
+
+        spidev@1 {
+                compatible = "linux,spidev";
+                spi-max-frequency = <5000000>;
+                reg = <1>;
+        };
+};
+
+&gem0 {
+	status = "okay";
+	phy-handle = <&ethernet_phy0>;
+	phy-mode = "rgmii-id";
+
+	ethernet_phy0: ethernet-phy@0 {
+		device_type = "ethernet-phy";
+		reg = <0>;
+	};
+};
+
+&usb0 {
+	status = "okay";
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
+};
+
+&amba {	
+	sdi_vdma: axivdma@43000000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		interrupt-parent = <&intc>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		#dma-cells = <1>;
+		#dma-channels = <1>;
+		reg = <0x43000000 0x10000>;
+		xlnx,num-fstores = <1>;
+		xlnx,flush-fsync = <1>;
+
+		dma-channel1@43000000 {
+			compatible = "xlnx,axi-vdma-s2mm-channel";
+			interrupts = <0 30 4>;
+			xlnx,datawidth = <64>;
+			xlnx,genlock-mode = <0>;
+			xlnx,include-dre = <0>;
+		};
+	};
+
+	hdmi_vdma: axivdma@43010000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		interrupt-parent = <&intc>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		#dma-cells = <1>;
+		#dma-channels = <1>;
+		reg = <0x43010000 0x10000>;
+		xlnx,num-fstores = <1>;
+		xlnx,flush-fsync = <1>;
+
+		dma-channel1@43000000 {
+			compatible = "xlnx,axi-vdma-s2mm-channel";
+			interrupts = <0 31 4>;
+			xlnx,datawidth = <64>;
+			xlnx,genlock-mode = <0>;
+			xlnx,include-dre = <0>;
+		};
+	};
+
+	codec_vdma: axivdma@43020000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		interrupt-parent = <&intc>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		#dma-cells = <1>;
+		#dma-channels = <1>;
+		reg = <0x43020000 0x10000>;
+		xlnx,num-fstores = <1>;
+		xlnx,flush-fsync = <1>;
+
+		dma-channel1@43000000 {
+			compatible = "xlnx,axi-vdma-s2mm-channel";
+			interrupts = <0 32 4>;
+			xlnx,datawidth = <64>;
+			xlnx,genlock-mode = <0>;
+			xlnx,include-dre = <0>;
+		};
+	};
+
+	krtkl_video@43C20000 {
+		compatible = "krtkl,krtkl_video";
+		reg = <0x43c20000 0x10000>;
+		dma-names = "video_sdi", "video_hdmi";
+		dmas = <&sdi_vdma 0x1 &hdmi_vdma 0x1>;
+		memory-region_sdi = <&sdi_mem>;
+		memory-region_hdmi = <&hdmi_mem>;
+	};
+
+	krtkl_scaler {
+		compatible = "krtkl,krtkl_scaler";
+		dma-names = "video_scaler";
+		dmas = <&codec_vdma 0x1>;
+	};	
+};

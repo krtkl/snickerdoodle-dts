@@ -8,6 +8,10 @@ dtb-y += snickerdoodle-one.dtb
 dtb-y += snickerdoodle-black.dtb
 dtb-y += snickerdoodle-prime.dtb
 dtb-y += snickerdoodle-prime-le.dtb
+dtb-y += snickerdoodle-black-uio-test.dtb
+dtb-y += snickerdoodle-black-enet-usb.dtb
+dtb-y += snickerdoodle-spi.dtb
+
 
 # Add the device tree overlays
 dtbo-y += dtso/
@@ -19,7 +23,7 @@ all : $(dtb-y) dtbo board_dtb
 
 %.dtb : %.dts
 	@echo "  $< --> $@"
-	@dtc -I dts -O dtb -o $@ $<
+	@dtc -@ -I dts -O dtb -o $@ $<
 
 .PHONY = dtbo
 
