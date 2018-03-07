@@ -26,12 +26,6 @@
 		device_type = "memory";
 		reg = <0x0 0x40000000>;
 	};
-
-	xlnk {
-		compatible = "xlnx,xlnk-1.0";
-		clock-names = "clk50", "clk100", "clk150", "clk200";
-		clocks = <&clkc 15>, <&clkc 16>, <&clkc 17>, <&clkc 18>;
-	};
 };
 
 &wlcore {

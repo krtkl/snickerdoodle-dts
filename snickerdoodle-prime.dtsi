@@ -20,5 +20,5 @@
 };
 
 &wlcore {
-	compatible = "wlcore", "ti,wl1831";
+	compatible = "wlcore", "ti,wl1801";
 };
