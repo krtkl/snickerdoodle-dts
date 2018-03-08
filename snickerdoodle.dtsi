@@ -10,7 +10,7 @@
 
 /include/ "zynq-7000.dtsi"
 / {
-        compatible = "xlnx,zynq-snickerdoodle", "xlnx,zynq-7000";
+        compatible = "krtkl,snickerdoodle", "xlnx,zynq-7000";
 
 	aliases {
 		serial0 = &uart0;
