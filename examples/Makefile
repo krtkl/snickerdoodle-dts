@@ -16,7 +16,6 @@ dtb-y +=	snickerdoodle/gpio.dtb \
 PHONY += all
 all: check-dtsi $(dtb-y)
 
-
 PHONY += clean
 clean:
 	@rm -f $(dtb-y)
