@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2016 krtkl inc.
+ * Copyright (c) 2018 krtkl inc.
  *
- * snickerdoodle prime base device tree source
+ * snickerdoodle Prime SPI Device Tree Source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by

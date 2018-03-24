@@ -1,0 +1,32 @@
+/**
+ * Copyright (c) 2018 krtkl inc.
+ *
+ * snickerdoodle Black SPI Device Tree Source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+
+/ {
+	aliases {
+		spi2 = &spi0;
+	};
+};
+
+&spi0 {
+	status = "okay";
+	num-cs = <1>;
+	is-decoded-cs = <0>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	dev@0 {
+		compatible = "linux,spidev";
+		reg = <0>;
+		spi-max-frequency = <1000000>;
+	};
+};

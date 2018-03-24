@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2016 krtkl inc.
+ * Copyright (c) 2018 krtkl inc.
  *
- * snickerdoodle prime base device tree source
+ * snickerdoodle One AXI GPIO Device Tree Source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -9,10 +9,10 @@
  */
 
 /dts-v1/;
-/include/ "snickerdoodle-prime.dtsi"
+/include/ "snickerdoodle-one.dtsi"
 
 &amba {
-	axi_gpio_0: gpio@41200000 {
+	axi_gpio0: gpio@41200000 {
 		compatible = "xlnx,xps-gpio-1.00.a";
 		reg = <0x41200000 0x10000>;
 		gpio-controller;
@@ -31,7 +31,7 @@
 		xlnx,interrupt-present = <1>;
 	};
 
-	axi_gpio_1: gpio@41210000 {
+	axi_gpio1: gpio@41210000 {
 		compatible = "xlnx,xps-gpio-1.00.a";
 		reg = <0x41210000 0x10000>;
 		gpio-controller;
@@ -47,22 +47,6 @@
 		xlnx,all-inputs-2 = <0>;
 		xlnx,gpio2-width = <25>;
 		xlnx,tri-default-2 = <0xffffffff>;
-		xlnx,interrupt-present = <1>;
-	};
-
-	axi_gpio_2: gpio@41220000 {
-		compatible = "xlnx,xps-gpio-1.00.a";
-		reg = <0x41220000 0x10000>;
-		gpio-controller;
-		clock-names = "s_axi_aclk";
-		clocks = <&clkc 15>;
-		interrupt-parent = <&intc>;
-		interrupts = <0 31 4>;
-		#gpio-cells = <2>;
-		xlnx,all-inputs = <0>;
-		xlnx,gpio-width = <25>;
-		xlnx,tri-default = <0xffffffff>;
-		xlnx,is-dual = <0>;
 		xlnx,interrupt-present = <1>;
 	};
 };
