@@ -1,0 +1,41 @@
+/**
+ * Copyright (c) 2018 krtkl inc.
+ *
+ * snickerdoodle UIO Device Tree Overlay
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "krtkl,snickerdoodle", "xlnx,zynq-7000";
+
+	fragment@0 {
+		target = <&amba>;
+		__overlay__ {
+
+			#address-cells = <1>;
+			#size-cells = <1>;
+			
+			uio2: uio2@40000000 {
+				reg = <0x40000000 0x80000000>;
+				compatible = "krtkl,generic-uio,ui_pdrv";
+				status = "okay";
+				interrupt-parent = <&intc>;
+				interrupts = <0 31 4>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target-path = "\__symbols__";
+		__overlay__ {
+			uio2 = &uio2;
+		};
+	};
+};
+

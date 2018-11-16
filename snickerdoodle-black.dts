@@ -10,3 +10,4 @@
 
 /dts-v1/;
 /include/ "snickerdoodle-black.dtsi"
+/include/ "uio.dtsi"

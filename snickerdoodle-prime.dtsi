@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2017 krtkl inc.
+ * Copyright (c) 2016 krtkl inc.
  *
- * snickerdoodle One base device tree source
+ * snickerdoodle prime base device tree source
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published by
@@ -10,8 +10,18 @@
 
 /include/ "snickerdoodle.dtsi"
 / {
-        model = "snickerdoodle One";
-        compatible = "krtkl,snickerdoodle-one", "krtkl,snickerdoodle", "xlnx,zynq-7000";
+        model = "snickerdoodle Prime";
+        compatible = "krtkl,snickerdoodle-prime", "krtkl,snickerdoodle", "xlnx,zynq-7000";
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		reserved@18000000 {
+			reg = <0x18000000 0x8000000>;
+		};
+	};
 
 	memory@0 {
 		device_type = "memory";

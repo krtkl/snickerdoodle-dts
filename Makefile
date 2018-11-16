@@ -7,31 +7,28 @@ dtb-y += snickerdoodle-black.dtb
 dtb-y += snickerdoodle-prime.dtb
 dtb-y += snickerdoodle-one.dtb
 
-examples-y += examples/
-
-export DTSI_PATH := $(PWD)/include/
+dtbo-y += dtbo/
 
 PHONY += all
-all: $(dtb-y) examples
+all: $(dtb-y) dtbo
 
 # Do not print the directory
 MAKEFLAGS += --no-print-directory
 Q = @
 
-PHONY += examples
-examples: $(examples-y)
-	$(Q)$(MAKE) $(MAKEFLAGS) -C $<
+PHONY += dtbo
+dtbo: $(dtbo-y)
+	$(Q)$(MAKE) $(MAKEFLAGS) -C $@
 
 %.dtb: %.dts
 	@echo "  $< --> $@"
-	@dtc -@ -i $(DTSI_PATH) -I dts -O dtb -o $@ $<
-
-%.dtbo: %.dtso
-	@dtc -I dts -O dtb -o $@ $<
+	@dtc -@ -I dts -O dtb -o $@ $<
 
 PHONY += clean
-clean:
+clean: clean_dtbo
 	$(Q)rm -f $(dtb-y)
-	$(Q)$(MAKE) $(MAKEFLAGS) -C $(examples-y) $@
+
+clean_dtbo: $(dtbo-y)
+	$(Q)$(MAKE) $(MAKEFLAGS) -C $< clean
 
 .PHONY: $(PHONY)

@@ -10,9 +10,20 @@
 
 /dts-v1/;
 /include/ "snickerdoodle.dtsi"
+/include/ "uio.dtsi"
 
 / {
 	model = "snickerdoodle";
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		reserved@30000000 {
+			reg = <0x30000000 0x10000000>;
+		};
+	};
 
 	memory@0 {
 		device_type = "memory";
