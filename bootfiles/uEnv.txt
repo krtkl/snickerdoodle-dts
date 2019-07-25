@@ -1,0 +1,5 @@
+bootargs=console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprink
+script_image=uboot.scr
+script_load_address=0x4000000
+uenvcmd=if test -e mmc 0 ${script_image}; then load mmc 0 ${script_load_address} ${script_image} && source ${script_load_address}; fi
+

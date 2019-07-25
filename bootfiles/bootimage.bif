@@ -1,0 +1,4 @@
+image : {
+        [bootloader] ./bootfiles/fsbl.elf
+        ./bootfiles/u-boot.elf
+}
