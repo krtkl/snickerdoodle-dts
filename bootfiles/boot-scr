@@ -1,0 +1,19 @@
+
+if test -e mmc 0 ${bitstream_image}; then
+  echo Loading bitstream from ${bitstream_image}
+  load mmc 0 ${loadbit_addr} ${bitstream_image} && fpga loadb 0 ${loadbit_addr} ${filesize};
+else
+  echo No bitstream present. Bitstream will not be loaded.
+fi
+
+
+if test -e mmc 0 ${kernel_image}; then
+  fatload mmc 0 ${kernel_load_address} ${kernel_image};
+  fatload mmc 0 ${devicetree_load_address} ${devicetree_image};
+  if test -e mmc 0 ${ramdisk_image}; then
+    fatload mmc 0 ${ramdisk_load_address} ${ramdisk_image};
+    bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address};
+  else
+    bootm ${kernel_load_address} - ${devicetree_load_address};
+  fi
+fi

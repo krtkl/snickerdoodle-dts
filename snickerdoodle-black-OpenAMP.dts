@@ -1,0 +1,26 @@
+/**
+ * Copyright (c) 2017 krtkl inc.
+ *
+ * snickerdoodle Black base device tree source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+/include/ "uio.dtsi"
+
+/ { 
+	zynq_remoteproc@0 {
+		compatible = "xlnx,zynq_remoteproc";
+		reg = <0x0 0x10000000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 37 4>, <0 38 4>;
+		firmware = "freertos";
+		ipino = <15>;
+		vring0 = <15>;
+		vring1 = <14>;
+	};
+};

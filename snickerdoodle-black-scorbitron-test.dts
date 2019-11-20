@@ -1,0 +1,75 @@
+/**
+ * Copyright (c) 2018 krtkl inc.
+ *
+ * snickerdoodle Black Scorbitron Device Tree Source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+
+/ {
+	usb_phy0: usb-phy0 {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		view-port = <0x170>;
+		drv-vbus;
+	};
+};
+
+&i2c0 {
+	status = "okay";
+	clock-frequency = <100000>;
+	
+	usb2514b@2c {
+		compatible = "microchip,usb2514b";
+		reg = <0x2c>;
+	};
+};
+
+&usb0 {
+	status = "okay";
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
+};
+
+&fpga_full {
+	i2c2: i2c@41600000 {
+		compatible = "xlnx,xps-iic-2.00.a";
+		reg = <0x41600000 0x10000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 59 4>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+	
+	i2c3: i2c@41610000 {
+		compatible = "xlnx,xps-iic-2.00.a";
+		reg = <0x41610000 0x10000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 58 4>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+
+	i2c4: i2c@41620000 {
+		compatible = "xlnx,xps-iic-2.00.a";
+		reg = <0x41620000 0x10000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 57 4>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+
+	i2c5: i2c@41630000 {
+		compatible = "xlnx,xps-iic-2.00.a";
+		reg = <0x41630000 0x10000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 56 4>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+};

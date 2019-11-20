@@ -1,0 +1,95 @@
+/**
+ * Copyright (c) 2018 krtkl inc.
+ *
+ * snickerdoodle Black piSmasher Device Tree Source
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ */
+
+/dts-v1/;
+/include/ "snickerdoodle-black.dtsi"
+/include/ "uio.dtsi"
+
+/ {
+	aliases {
+		ethernet0 = &gem0;
+		ethernet1 = &gem1;
+	};
+
+	usb_phy0: usb-phy0 {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		view-port = <0x170>;
+		drv-vbus;
+	};
+};
+
+&i2c1 {
+	status = "okay";
+	clock-frequency = <100000>;
+	
+	usb2514b@2c {
+		compatible = "microchip,usb2514b";
+		reg = <0x2c>;
+	};
+};
+
+&usb0 {
+	status = "okay";
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
+};
+
+&gem0 {
+	status = "okay";
+	phy-mode = "rgmii-id";
+
+	eth_phy0: ethernet-phy@0 {
+		reg = <0>;
+		device_type = "ethernet-phy";
+	};
+
+	gmii2rgmii0: gmiitorgmii@8 {
+		compatible = "xlnx,gmii-to-rgmii-1.0";
+		reg = <8>;
+		phy-handle = <&eth_phy0>;
+	};
+};
+
+&gem1 {
+	status = "okay";
+	phy-mode = "rgmii-id";
+
+	eth_phy1: ethernet-phy@1 {
+		reg = <0>;
+		device_type = "ethernet-phy";
+	};
+
+	gmii2rgmii1: gmiitorgmii@9 {
+		compatible = "xlnx,gmii-to-rgmii-1.0";
+		reg = <9>;
+		phy-handle = <&eth_phy1>;
+	};
+};
+
+&uio15 {
+	reg = <0x43000000 0x10000>;
+};
+
+&uio14 {
+	reg = <0x43000000 0x10000>;
+};
+
+&uio13 {
+	reg = <0x43c00000 0x10000>;
+};
+
+&uio12 {
+	reg = <0x43c10000 0x10000>;
+};
+
+&uio11 {
+	reg = <0x43c20000 0x10000>;
+};
