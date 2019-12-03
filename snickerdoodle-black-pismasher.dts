@@ -10,6 +10,7 @@
 
 /dts-v1/;
 /include/ "snickerdoodle-black.dtsi"
+/include/ "uio.dtsi"
 
 / {
 	aliases {
@@ -39,11 +40,25 @@
 &i2c1 {
 	status = "okay";
 	clock-frequency = <100000>;
-	
+
 	usb2514b@2c {
 		compatible = "microchip,usb2514b";
 		reg = <0x2c>;
 		reset-gpios = <&gpio0 16 1>;
+	};
+};
+
+&spi1 {
+	status = "okay";
+	num-cs = <1>;
+	is-decoded-cs = <0>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	dev@0 {
+		compatible = "linux,spidev";
+		reg = <0>;
+		spi-max-frequency = <1000000>;
 	};
 };
 
@@ -59,7 +74,8 @@
 	reset-gpios = <&gpio0 19 1>;
 
 	eth_phy0: ethernet-phy@0 {
-		reg = <0>;
+		compatible = "marvell,88E1510";
+        reg = <0>;
 		device_type = "ethernet-phy";
 	};
 
@@ -76,7 +92,8 @@
 	reset-gpios = <&gpio0 17 1>;
 
 	eth_phy1: ethernet-phy@0 {
-		reg = <0>;
+		compatible = "marvell,88E1510";
+        reg = <0>;
 		device_type = "ethernet-phy";
 	};
 
