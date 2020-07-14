@@ -9,7 +9,8 @@
  */
 
 /dts-v1/;
-/include/ "snickerdoodle-black.dtsi"
+/include/ "snickerdoodle-one.dtsi"
+/include/ "uio.dtsi"
 
 / {
 	aliases {
@@ -19,18 +20,18 @@
 
 	power_en_reg: fixed-regulator-powen {
 		compatible = "regulator-fixed";
-		regulator-name = "wlan-en-regulator";
+		regulator-name = "power-en-regulator";
+		gpio = <&gpio0 20 4>;
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
-		gpio = <&gpio0 20 4>;
-		startup-delay-us = <90000>;
+		startup-delay-us = <70000>;
+		regulator-always-on;
 		enable-active-high;
 	};
 
 	usb_phy0: usb-phy0 {
 		compatible = "usb-nop-xceiv";
 		#phy-cells = <0>;
-		reset-gpios = <&gpio0 16 1>;
 		view-port = <0x170>;
 		drv-vbus;
 	};
@@ -39,10 +40,11 @@
 &i2c1 {
 	status = "okay";
 	clock-frequency = <100000>;
-	
+
 	usb2514b@2c {
 		compatible = "microchip,usb2514b";
 		reg = <0x2c>;
+		reset-gpios = <&gpio0 16 1>;
 	};
 };
 
@@ -57,6 +59,7 @@
 	phy-mode = "rgmii-id";
 
 	eth_phy0: ethernet-phy@0 {
+		compatible = "marvell,88E1510";
 		reg = <0>;
 		device_type = "ethernet-phy";
 		reset-gpios = <&gpio0 19 1>;
@@ -74,7 +77,8 @@
 	phy-mode = "rgmii-id";
 
 	eth_phy1: ethernet-phy@1 {
-		reg = <1>;
+		compatible = "marvell,88E1510";
+		reg = <0>;
 		device_type = "ethernet-phy";
 		reset-gpios = <&gpio0 17 1>;
 	};

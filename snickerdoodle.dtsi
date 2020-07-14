@@ -62,7 +62,7 @@
 	cap-power-off-card;
 	keep-power-in-suspend;
 	#address-cells = <1>;
-	#size-cells = <0>;	
+	#size-cells = <0>;
 
 	wlcore: wlcore@0 {
 		reg = <2>;
@@ -72,8 +72,17 @@
 };
 
 &spi1 {
-	status = "okay";
-	num-cs = <1>;
+    status = "okay";
+    num-cs = <1>;
+    is-decoded-cs = <0>;
+    #address-cells = <1>;
+    #size-cells = <0>;
+
+    dev@0 {
+        compatible = "linux,spidev";
+        reg = <0>;
+        spi-max-frequency = <1000000>;
+    };
 };
 
 &qspi {
@@ -89,7 +98,7 @@
 		reg = <0>;
 		spi-max-frequency = <50000000>;
 		m25p,fast-read;
-		
+
 		partition@bootloader {
 			label = "bootloader";
 			reg = <0x0 0xe0000>;

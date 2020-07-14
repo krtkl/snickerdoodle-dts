@@ -21,7 +21,7 @@
 	power_en_reg: fixed-regulator-powen {
 		compatible = "regulator-fixed";
 		regulator-name = "power-en-regulator";
-		gpio = <&gpio0 20 0>;
+		gpio = <&gpio0 20 4>;
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
 		startup-delay-us = <70000>;
@@ -48,20 +48,6 @@
 	};
 };
 
-&spi1 {
-	status = "okay";
-	num-cs = <1>;
-	is-decoded-cs = <0>;
-	#address-cells = <1>;
-	#size-cells = <0>;
-
-	dev@0 {
-		compatible = "linux,spidev";
-		reg = <0>;
-		spi-max-frequency = <1000000>;
-	};
-};
-
 &usb0 {
 	status = "okay";
 	dr_mode = "host";
@@ -75,7 +61,7 @@
 
 	eth_phy0: ethernet-phy@0 {
 		compatible = "marvell,88E1510";
-        reg = <0>;
+		reg = <0>;
 		device_type = "ethernet-phy";
 	};
 
@@ -91,9 +77,9 @@
 	phy-mode = "rgmii-id";
 	reset-gpios = <&gpio0 17 1>;
 
-	eth_phy1: ethernet-phy@0 {
+	eth_phy1: ethernet-phy@1 {
 		compatible = "marvell,88E1510";
-        reg = <0>;
+		reg = <0>;
 		device_type = "ethernet-phy";
 	};
 

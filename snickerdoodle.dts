@@ -34,4 +34,3 @@
 &wlcore {
 	compatible = "wlcore", "ti,wl1831";
 };
-

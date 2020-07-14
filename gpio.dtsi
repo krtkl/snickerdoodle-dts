@@ -8,9 +8,6 @@
  * the Free Software Foundation.
  */
 
-/dts-v1/;
-/include/ "snickerdoodle.dtsi"
-
 &amba {
 	axi_gpio0: gpio@41200000 {
 		compatible = "xlnx,xps-gpio-1.00.a";
@@ -19,7 +16,7 @@
 		clock-names = "s_axi_aclk";
 		clocks = <&clkc 15>;
 		interrupt-parent = <&intc>;
-		interrupts = <0 29 4>;		
+		interrupts = <0 29 4>;
 		#gpio-cells = <2>;
 		xlnx,all-inputs = <0>;
 		xlnx,gpio-width = <25>;

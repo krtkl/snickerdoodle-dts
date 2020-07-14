@@ -12,7 +12,7 @@
 /include/ "snickerdoodle-black.dtsi"
 /include/ "uio.dtsi"
 
-/ { 
+/ {
 	zynq_remoteproc@0 {
 		compatible = "xlnx,zynq_remoteproc";
 		reg = <0x0 0x10000000>;
